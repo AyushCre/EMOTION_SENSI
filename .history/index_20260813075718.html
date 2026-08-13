@@ -134,31 +134,19 @@ Is Qadar Dil Nisaar Ho Gaya
 Is Qadar Bekaraar Ho Gaya
 Is Qadar Ab Khumaar Ho Gaya`;
         
-       
-        
+        // Dhyan rahe mp3 file ka naam exact wahi ho
         const audio = new Audio('ISS QADAR PART 2 SONG(2).mp3');
         const playBtn = document.getElementById('playBtn');
-        const playAgainBtn = document.getElementById('playAgainBtn'); // Naya button
         const container = document.getElementById('lyrics-container');
         
         const totalColors = 5;
 
-        // Ek naya function jo gaana aur lyrics dono start/restart karega
-        async function playSongAndLyrics() {
-            // Dono buttons ko hide kar do
+        playBtn.addEventListener('click', async () => {
             playBtn.style.display = 'none'; 
-            playAgainBtn.style.display = 'none'; 
-            
-            // Purane lyrics ko mita do (Reset)
-            container.innerHTML = '';
-            
-            // Gaane ko ekdum zero second se shuru karo
-            audio.currentTime = 0;
             audio.play(); 
             
             let currentColorIndex = Math.floor(Math.random() * totalColors);
             
-            // Lyrics typing loop
             for (let i = 0; i < lyricsText.length; i++) {
                 const char = lyricsText[i];
                 
@@ -172,15 +160,7 @@ Is Qadar Ab Khumaar Ho Gaya`;
                 window.scrollTo(0, document.body.scrollHeight);
                 await new Promise(resolve => setTimeout(resolve, 80));
             }
-
-            // Jab lyrics ka loop pura khatam ho jaye, tab "Play Again" button show karo
-            playAgainBtn.style.display = 'block';
-        }
-
-        // Pehli baar play karne ke liye
-        playBtn.addEventListener('click', playSongAndLyrics);
-        // Dobara play karne ke liye
-        playAgainBtn.addEventListener('click', playSongAndLyrics);
+        });
     </script>
 </body>
 </html>
