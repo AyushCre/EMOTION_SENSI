@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonLyrics - Iss Qadar</title>
+    <style>
+        /* Galaxy Background - Dark Deep Space Gradient */
+        body {
+            margin: 0;
+            padding: 20px;
+            /* Dark space blue se black ka gradient */
+            background: radial-gradient(circle at center, #1a0b2e 0%, #0d1117 80%, #000000 100%);
+            color: white;
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* Screen ke bahar scroll na ho */
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            color: #ff4d79; /* Soft romantic pink */
+            opacity: 0.15; /* Opacity kam rakhi hai taaki text clear rahe */
+            animation: floatUp linear infinite;
+            z-index: 0; /* Background mein rakhne ke liye */
+            pointer-events: none; /* Click interfere na kare */
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.25; }
+            80% { opacity: 0.15; }
+            100% { transform: translateY(-120vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        /* Text Container (Text hamesha upar rahega) */
+        #lyrics-container {
+            margin-top: 30px;
+            white-space: pre-wrap; 
+            font-size: 24px;
+            font-weight: bold;
+            max-width: 80%;
+            text-align: left;
+            z-index: 2; /* Hearts ke upar */
+            position: relative;
+        }
+
+        /* Play Button Styling */
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #ff3366; /* Button ko thoda romantic color diya hai */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff3366;
+            z-index: 2;
+            position: relative;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ff1a53;
+            box-shadow: 0 0 25px #ff1a53;
+        }
+        
+        /* Radiant/Neon Colors CSS Classes */
+        .color-0 { color: #ff5555; text-shadow: 0 0 8px #ff5555; } 
+        .color-1 { color: #50fa7b; text-shadow: 0 0 8px #50fa7b; } 
+        .color-2 { color: #f1fa8c; text-shadow: 0 0 8px #f1fa8c; } 
+        .color-3 { color: #8be9fd; text-shadow: 0 0 8px #8be9fd; } 
+        .color-4 { color: #ff79c6; text-shadow: 0 0 8px #ff79c6; } 
+    </style>
+</head>
+<body>
+
+    <!-- Background Hearts ke liye Container -->
+    <div id="hearts-background"></div>
+
+    <!-- Play Button aur Lyrics -->
+    <button id="playBtn">🎵 Play Song</button>
+    <div id="lyrics-container"></div>
+
+    <script>
+        // 1. Galaxy Hearts Generate Karne Ka Function
+        function createHearts() {
+            const container = document.getElementById('hearts-background');
+            const numHearts = 40; // Screen par ek baar mein 40 hearts rahenge
+
+            for (let i = 0; i < numHearts; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                // Heart shape emoji
+                heart.innerHTML = '❤';
+                
+                // Random size, position, and speed
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 8 + 5) + 's'; // 5s to 13s speed
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px'; // 10px to 30px size
+                
+                container.appendChild(heart);
+            }
+        }
+        // Load hote hi hearts bana do
+        createHearts();
+
+        // 2. Lyrics aur Audio Play Karne Ka Logic
+        const lyricsText = `Iss qadar tumse pyaar ho gaya
+Iss qadar dil nisaar ho gaya
+Iss qadar beqaraar ho gaya
+Iss qadar ab khumaar ho gaya`;
+        
+        // Dhyan rahe mp3 file ka naam exact wahi ho
+        const audio = new Audio('ISS QADAR PART 2 SONG(2).mp3');
+        const playBtn = document.getElementById('playBtn');
+        const container = document.getElementById('lyrics-container');
+        
+        const totalColors = 5;
+
+        playBtn.addEventListener('click', async () => {
+            playBtn.style.display = 'none'; 
+            audio.play(); 
+            
+            let currentColorIndex = Math.floor(Math.random() * totalColors);
+            
+            for (let i = 0; i < lyricsText.length; i++) {
+                const char = lyricsText[i];
+                
+                if (char === ' ' || char === '\n') {
+                    container.innerHTML += char;
+                    currentColorIndex = Math.floor(Math.random() * totalColors);
+                } else {
+                    container.innerHTML += `<span class="color-${currentColorIndex}">${char}</span>`;
+                }
+                
+                window.scrollTo(0, document.body.scrollHeight);
+                await new Promise(resolve => setTimeout(resolve, 80));
+            }
+        });
+    </script>
+</body>
+</html>

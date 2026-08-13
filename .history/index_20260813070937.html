@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonLyrics - Iss Qadar</title>
+    <style>
+        /* Terminal jaisa black background aur font set kar rahe hain */
+        body {
+            background-color: #0d1117; 
+            color: white;
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        #lyrics-container {
+            margin-top: 30px;
+            white-space: pre-wrap; /* Spaces aur newlines ko preserve karne ke liye */
+            font-size: 24px;
+            font-weight: bold;
+            max-width: 80%;
+            text-align: left;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #238636; /* GitHub green color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #238636;
+        }
+        button:hover {
+            background-color: #2ea043;
+        }
+        
+        /* CSS Classes radiant/neon colors ke liye */
+        .color-0 { color: #ff5555; text-shadow: 0 0 8px #ff5555; } /* Neon Red */
+        .color-1 { color: #50fa7b; text-shadow: 0 0 8px #50fa7b; } /* Neon Green */
+        .color-2 { color: #f1fa8c; text-shadow: 0 0 8px #f1fa8c; } /* Radiant Yellow */
+        .color-3 { color: #8be9fd; text-shadow: 0 0 8px #8be9fd; } /* Neon Cyan */
+        .color-4 { color: #ff79c6; text-shadow: 0 0 8px #ff79c6; } /* Glowing Pink */
+    </style>
+</head>
+<body>
+
+    <!-- Yeh wo play button hai jiske baare mein tumne kaha tha -->
+    <button id="playBtn">🎵 Play Song</button>
+    <div id="lyrics-container"></div>
+
+    <script>
+        // Yahan gaane ke lyrics he
+        const lyricsText = `Aankhein Yeh Mujhse Kahe
+Bas Tumko Yeh Takti Rahein
+Tu Hi Tu Basa Dil Mein Hardum Bepanah
+
+Dil Toh Chahe Dede Tujhko
+Phoolon Se Bhari Raahein
+Tumhari Har Ada Tumahri Har Nazar
+Pe Hum Marne Lage
+Un Pe Hum Marne Lage…
+
+Is Kadar Tumse Pyaar Ho Gaya
+Is Kadar Dil Nisaar Ho Gaya
+Is Kadar Bekaraar Ho Gaya
+Is Kadar Ab Khumaar Ho Gaya
+
+Is Qadar Tumse Pyaar Ho Gaya
+Is Qadar Dil Nisaar Ho Gaya
+Is Qadar Bekaraar Ho Gaya
+Is Qadar Ab Khumaar Ho Gaya`;
+        
+        // Exact audio file ka naam yahan likho
+        const audio = new Audio('ISS QADAR PART 2 SONG(2).mp3');
+        const playBtn = document.getElementById('playBtn');
+        const container = document.getElementById('lyrics-container');
+        
+        const totalColors = 5;
+
+        // Button click hone par yeh function chalega
+        playBtn.addEventListener('click', async () => {
+            playBtn.style.display = 'none'; // Button ko hide kar do
+            audio.play(); // Gana start
+            
+            let currentColorIndex = Math.floor(Math.random() * totalColors);
+            
+            // Loop chalega har ek alphabet ke liye
+            for (let i = 0; i < lyricsText.length; i++) {
+                const char = lyricsText[i];
+                
+                if (char === ' ' || char === '\n') {
+                    // Agar space ya enter hai toh normal add karo
+                    container.innerHTML += char;
+                    // Naya word shuru hone par color change karo
+                    currentColorIndex = Math.floor(Math.random() * totalColors);
+                } else {
+                    // Alphabet ko uske radiant color ki HTML class ke sath add karo
+                    container.innerHTML += `<span class="color-${currentColorIndex}">${char}</span>`;
+                }
+                
+                // Screen ko automatically niche scroll karne ke liye
+                window.scrollTo(0, document.body.scrollHeight);
+                
+                // 80 milliseconds ka delay (tumhare time.sleep(0.08) ke barabar)
+                await new Promise(resolve => setTimeout(resolve, 80));
+            }
+        });
+    </script>
+</body>
+</html>
