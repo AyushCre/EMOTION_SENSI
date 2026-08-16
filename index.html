@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -48,7 +49,6 @@
 
         #hearts-bg {
             position: fixed;
-
             inset: 0;
 
             width: 100%;
@@ -98,10 +98,7 @@
 
             0% {
                 transform: scale(1);
-
-                text-shadow:
-                    0 0 8px red;
-
+                text-shadow: 0 0 6px red;
                 opacity: 0.2;
             }
 
@@ -109,18 +106,15 @@
                 transform: scale(1.25);
 
                 text-shadow:
-                    0 0 18px red,
-                    0 0 35px red;
+                    0 0 12px red,
+                    0 0 22px red;
 
                 opacity: 0.9;
             }
 
             100% {
                 transform: scale(1);
-
-                text-shadow:
-                    0 0 8px red;
-
+                text-shadow: 0 0 6px red;
                 opacity: 0.2;
             }
         }
@@ -130,10 +124,7 @@
 
             0% {
                 transform: scale(1);
-
-                text-shadow:
-                    0 0 5px red;
-
+                text-shadow: 0 0 4px red;
                 opacity: 0.2;
             }
 
@@ -141,18 +132,15 @@
                 transform: scale(1.18);
 
                 text-shadow:
-                    0 0 15px red,
-                    0 0 30px red;
+                    0 0 10px red,
+                    0 0 20px red;
 
                 opacity: 0.8;
             }
 
             100% {
                 transform: scale(1);
-
-                text-shadow:
-                    0 0 5px red;
-
+                text-shadow: 0 0 4px red;
                 opacity: 0.2;
             }
         }
@@ -163,7 +151,6 @@
         ===================================================== */
 
         #photo-container {
-
             position: absolute;
 
             top: 4%;
@@ -190,18 +177,16 @@
 
 
         /* =====================================================
-           PHOTO CROSS FADE
+           SMOOTH PHOTO CROSS FADE
         ===================================================== */
 
         #slider-image-1,
         #slider-image-2 {
-
             position: absolute;
 
             display: block;
 
             max-width: min(85%, 800px);
-
             max-height: 100%;
 
             width: auto;
@@ -212,14 +197,9 @@
             border-radius: 15px;
 
             box-shadow:
-                0 0 20px rgba(255, 0, 50, 0.35);
+                0 0 18px rgba(255, 0, 50, 0.30);
 
             opacity: 0;
-
-            /*
-                Smooth transition.
-                Both images stay in the same place.
-            */
 
             transition:
                 opacity 1.5s ease-in-out;
@@ -227,8 +207,6 @@
             will-change: opacity;
         }
 
-
-        /* First photo visible initially */
 
         #slider-image-1 {
             opacity: 1;
@@ -245,7 +223,6 @@
         ===================================================== */
 
         #lyrics-area {
-
             position: absolute;
 
             bottom: 2vh;
@@ -255,7 +232,7 @@
 
             transform: translateX(-50%);
 
-            width: min(80%, 1000px);
+            width: min(85%, 1100px);
 
             height: 35vh;
             height: 35dvh;
@@ -292,30 +269,38 @@
         }
 
 
-        .line {
+        /* =====================================================
+           LYRICS TEXT
+           EACH WORD = DIFFERENT COLOUR
+        ===================================================== */
 
+        .line {
             width: 100%;
 
             font-size:
                 clamp(
-                    18px,
-                    2vw,
-                    26px
+                    22px,
+                    2.4vw,
+                    32px
                 );
 
-            line-height: 1.35;
+            line-height: 1.4;
 
             font-weight: bold;
 
             margin-bottom: 20px;
 
-            padding: 0 10px;
+            padding: 0 12px;
 
             color: #ffffff;
 
+            /*
+                Clean shadow only.
+                No heavy blur.
+            */
+
             text-shadow:
-                0 0 10px #ff79c6,
-                0 0 20px #ff79c6;
+                0 1px 2px rgba(0, 0, 0, 0.9);
 
             transition:
                 transform 3s ease-in,
@@ -328,14 +313,55 @@
             bottom: 10%;
 
             overflow-wrap: break-word;
+
+            -webkit-font-smoothing: antialiased;
+
+            text-rendering: optimizeLegibility;
         }
 
 
+        /* =====================================================
+           WORD
+        ===================================================== */
+
+        .word {
+            display: inline-block;
+
+            font-weight: bold;
+
+            /*
+                Small clean glow matching
+                the word colour.
+            */
+
+            text-shadow:
+                0 0 3px currentColor,
+                0 1px 2px rgba(0, 0, 0, 0.9);
+        }
+
+
+        /* =====================================================
+           NAME CHARACTER
+           EACH ALPHABET = DIFFERENT COLOUR
+        ===================================================== */
+
+        .name-char {
+            display: inline-block;
+
+            font-weight: bold;
+
+            text-shadow:
+                0 0 3px currentColor,
+                0 1px 2px rgba(0, 0, 0, 0.9);
+        }
+
+
+        /* =====================================================
+           SCROLL UP
+        ===================================================== */
+
         .scroll-up {
-
-            transform:
-                translateY(-25vh);
-
+            transform: translateY(-25vh);
             opacity: 0;
         }
 
@@ -345,7 +371,6 @@
         ===================================================== */
 
         #welcome-screen {
-
             position: absolute;
 
             top: 50%;
@@ -374,23 +399,22 @@
             border-radius: 15px;
 
             box-shadow:
-                0 0 30px
-                rgba(255, 0, 50, 0.3);
+                0 0 25px
+                rgba(255, 0, 50, 0.25);
 
             border:
                 1px solid #aa0000;
 
-            backdrop-filter:
-                blur(5px);
+            backdrop-filter: blur(5px);
         }
 
 
         #welcome-screen h2 {
-
             color: #ff79c6;
 
             text-shadow:
-                0 0 12px #ff79c6;
+                0 0 5px #ff79c6,
+                0 0 12px #ff1493;
 
             margin:
                 0 0 25px;
@@ -411,7 +435,6 @@
         ===================================================== */
 
         #userName {
-
             display: block;
 
             width:
@@ -449,15 +472,15 @@
                 monospace;
 
             box-shadow:
-                0 0 15px
-                rgba(255, 0, 50, 0.3);
+                0 0 12px
+                rgba(255, 0, 50, 0.25);
         }
 
 
         #userName:focus {
-
             box-shadow:
-                0 0 20px #ff3333;
+                0 0 8px #ff3333,
+                0 0 18px #ff3333;
         }
 
 
@@ -466,7 +489,6 @@
         ===================================================== */
 
         .action-btn {
-
             padding:
                 13px 28px;
 
@@ -491,7 +513,7 @@
             cursor: pointer;
 
             box-shadow:
-                0 0 18px #aa0000;
+                0 0 15px #aa0000;
 
             z-index: 10;
 
@@ -502,7 +524,8 @@
 
             font-weight: bold;
 
-            touch-action: manipulation;
+            touch-action:
+                manipulation;
 
             transition:
                 background-color 0.2s ease,
@@ -512,17 +535,15 @@
 
 
         .action-btn:hover {
-
             background-color:
                 #ff0000;
 
             box-shadow:
-                0 0 30px #ff0000;
+                0 0 20px #ff0000;
         }
 
 
         .action-btn:active {
-
             transform:
                 scale(0.96);
         }
@@ -533,7 +554,6 @@
         ===================================================== */
 
         #playAgainBtn {
-
             position: absolute;
 
             top: 50%;
@@ -553,7 +573,6 @@
         ===================================================== */
 
         #sticky-name {
-
             position: absolute;
 
             top: 57vh;
@@ -570,16 +589,12 @@
 
             font-size:
                 clamp(
-                    22px,
-                    4vw,
-                    34px
+                    24px,
+                    4.5vw,
+                    38px
                 );
 
-            color: #ff79c6;
-
-            text-shadow:
-                0 0 12px #ff79c6,
-                0 0 25px #ff0000;
+            color: #ffffff;
 
             z-index: 20;
 
@@ -597,6 +612,9 @@
             font-style: italic;
 
             overflow-wrap: break-word;
+
+            -webkit-font-smoothing:
+                antialiased;
         }
 
 
@@ -604,11 +622,14 @@
            TABLET
         ===================================================== */
 
-        @media (min-width: 601px)
-        and (max-width: 1024px) {
+        @media (
+            min-width: 601px
+        )
+        and (
+            max-width: 1024px
+        ) {
 
             #photo-container {
-
                 top: 5%;
 
                 height: 48dvh;
@@ -617,38 +638,40 @@
 
             #slider-image-1,
             #slider-image-2 {
-
                 max-width: 80%;
             }
 
 
             #lyrics-area {
-
-                width: 88%;
+                width: 90%;
 
                 height: 38dvh;
             }
 
 
             .line {
-
                 font-size:
                     clamp(
-                        20px,
-                        2.8vw,
-                        25px
+                        22px,
+                        3vw,
+                        30px
                     );
             }
 
 
             #sticky-name {
-
                 top: 55dvh;
+
+                font-size:
+                    clamp(
+                        24px,
+                        4vw,
+                        34px
+                    );
             }
 
 
             .heart {
-
                 font-size: 22px;
             }
         }
@@ -661,23 +684,19 @@
         @media (max-width: 600px) {
 
             body {
-
-                min-height: 100dvh;
+                min-height:
+                    100dvh;
             }
 
 
-            /* Smaller hearts */
-
             .heart {
-
                 font-size: 17px;
             }
 
 
-            /* Photo */
+            /* PHOTO */
 
             #photo-container {
-
                 top: 3%;
 
                 height: 46dvh;
@@ -688,7 +707,6 @@
 
             #slider-image-1,
             #slider-image-2 {
-
                 max-width: 90%;
 
                 max-height: 100%;
@@ -696,32 +714,30 @@
                 border-radius: 12px;
 
                 box-shadow:
-                    0 0 15px
-                    rgba(255, 0, 50, 0.3);
+                    0 0 12px
+                    rgba(255, 0, 50, 0.25);
             }
 
 
-            /* Name */
+            /* NAME */
 
             #sticky-name {
-
                 top: 51dvh;
 
                 font-size:
                     clamp(
-                        20px,
+                        22px,
                         6vw,
-                        28px
+                        30px
                     );
 
                 width: 92%;
             }
 
 
-            /* Lyrics */
+            /* LYRICS */
 
             #lyrics-area {
-
                 bottom: 2dvh;
 
                 width: 94%;
@@ -731,37 +747,51 @@
 
 
             .line {
-
                 font-size:
                     clamp(
-                        16px,
-                        5vw,
-                        21px
+                        18px,
+                        5.5vw,
+                        24px
                     );
 
-                line-height: 1.35;
+                line-height: 1.4;
 
-                padding: 0 5px;
+                padding:
+                    0 5px;
 
                 margin-bottom: 12px;
 
                 text-shadow:
-                    0 0 8px #ff79c6,
-                    0 0 15px #ff79c6;
+                    0 1px 2px
+                    rgba(0, 0, 0, 0.9);
+            }
+
+
+            .word {
+                text-shadow:
+                    0 0 2px currentColor,
+                    0 1px 2px
+                    rgba(0, 0, 0, 0.9);
+            }
+
+
+            .name-char {
+                text-shadow:
+                    0 0 2px currentColor,
+                    0 1px 2px
+                    rgba(0, 0, 0, 0.9);
             }
 
 
             .scroll-up {
-
                 transform:
                     translateY(-22dvh);
             }
 
 
-            /* Welcome */
+            /* WELCOME */
 
             #welcome-screen {
-
                 width: 90%;
 
                 padding:
@@ -772,7 +802,6 @@
 
 
             #welcome-screen h2 {
-
                 font-size: 18px;
 
                 margin-bottom: 22px;
@@ -780,7 +809,6 @@
 
 
             #userName {
-
                 width: 100%;
 
                 font-size: 17px;
@@ -790,7 +818,6 @@
 
 
             .action-btn {
-
                 width: auto;
 
                 max-width: 100%;
@@ -803,7 +830,6 @@
 
 
             #playAgainBtn {
-
                 width: auto;
             }
         }
@@ -816,46 +842,39 @@
         @media (max-width: 380px) {
 
             #photo-container {
-
                 height: 43dvh;
             }
 
 
             #sticky-name {
-
                 top: 49dvh;
 
-                font-size: 20px;
+                font-size: 21px;
             }
 
 
             #lyrics-area {
-
                 height: 38dvh;
             }
 
 
             .line {
-
-                font-size: 15px;
+                font-size: 17px;
             }
 
 
             #welcome-screen {
-
                 padding:
                     20px 14px;
             }
 
 
             #welcome-screen h2 {
-
                 font-size: 16px;
             }
 
 
             .action-btn {
-
                 font-size: 15px;
 
                 padding:
@@ -868,11 +887,14 @@
            LANDSCAPE MOBILE
         ===================================================== */
 
-        @media (max-height: 500px)
-        and (orientation: landscape) {
+        @media (
+            max-height: 500px
+        )
+        and (
+            orientation: landscape
+        ) {
 
             #photo-container {
-
                 top: 2dvh;
 
                 height: 55dvh;
@@ -881,7 +903,6 @@
 
             #slider-image-1,
             #slider-image-2 {
-
                 max-height: 100%;
 
                 max-width: 45%;
@@ -889,15 +910,13 @@
 
 
             #sticky-name {
-
                 top: 57dvh;
 
-                font-size: 18px;
+                font-size: 20px;
             }
 
 
             #lyrics-area {
-
                 bottom: 1dvh;
 
                 height: 34dvh;
@@ -907,15 +926,13 @@
 
 
             .line {
-
-                font-size: 16px;
+                font-size: 18px;
 
                 margin-bottom: 8px;
             }
 
 
             #welcome-screen {
-
                 width: 70%;
 
                 padding: 15px;
@@ -923,7 +940,6 @@
 
 
             #welcome-screen h2 {
-
                 font-size: 15px;
 
                 margin-bottom: 10px;
@@ -931,7 +947,6 @@
 
 
             #userName {
-
                 padding: 8px;
 
                 margin-bottom: 10px;
@@ -939,7 +954,6 @@
 
 
             .action-btn {
-
                 min-height: 40px;
 
                 padding:
@@ -954,13 +968,14 @@
            REDUCED MOTION
         ===================================================== */
 
-        @media (prefers-reduced-motion: reduce) {
+        @media (
+            prefers-reduced-motion: reduce
+        ) {
 
             .heart,
             .heart-left,
             .heart-right,
             .heart-center {
-
                 animation-duration: 3s;
             }
 
@@ -968,12 +983,13 @@
             #slider-image-1,
             #slider-image-2,
             .line {
-
-                transition-duration: 0.5s;
+                transition-duration:
+                    0.5s;
             }
         }
 
     </style>
+
 </head>
 
 
@@ -1073,7 +1089,9 @@
         ===================================================== */
 
         const heartsBg =
-            document.getElementById('hearts-bg');
+            document.getElementById(
+                'hearts-bg'
+            );
 
 
         function createHearts(
@@ -1094,20 +1112,25 @@
             ) {
 
                 const heart =
-                    document.createElement('div');
+                    document.createElement(
+                        'div'
+                    );
 
 
                 heart.className =
                     `heart ${className}`;
 
 
-                heart.textContent = '❤';
+                heart.textContent =
+                    '❤';
 
 
                 const leftPos =
                     Math.random() *
-                    (maxLeft - minLeft)
-                    +
+                    (
+                        maxLeft -
+                        minLeft
+                    ) +
                     minLeft;
 
 
@@ -1116,26 +1139,28 @@
 
 
                 heart.style.top =
-                    Math.random() * 95 + 'vh';
+                    Math.random() *
+                    95 +
+                    'vh';
 
 
                 heart.style.animationDelay =
-                    Math.random() * 2 + 's';
+                    Math.random() *
+                    2 +
+                    's';
 
 
-                fragment.appendChild(heart);
+                fragment.appendChild(
+                    heart
+                );
             }
 
 
-            heartsBg.appendChild(fragment);
+            heartsBg.appendChild(
+                fragment
+            );
         }
 
-
-        /*
-            Desktop = 100 hearts
-            Tablet  = 60 hearts
-            Mobile  = 40 hearts
-        */
 
         function generateResponsiveHearts() {
 
@@ -1143,7 +1168,8 @@
                 window.innerWidth;
 
 
-            heartsBg.innerHTML = '';
+            heartsBg.innerHTML =
+                '';
 
 
             if (width <= 600) {
@@ -1234,7 +1260,8 @@
 
         /* =====================================================
            IMAGE SLIDER
-           SMOOTH CROSS-FADE
+           SMOOTH CROSS FADE
+           3.5 SECOND INTERVAL
         ===================================================== */
 
         const images = [
@@ -1275,28 +1302,20 @@
         let activeImage = 1;
 
 
-
-        /* =====================================================
-           START IMAGE SLIDER
-        ===================================================== */
-
         function startImageSlider() {
 
             document
                 .getElementById(
                     'photo-container'
                 )
-                .style.display = 'flex';
+                .style.display =
+                'flex';
 
 
             clearInterval(
                 sliderInterval
             );
 
-
-            /*
-                Reset slider
-            */
 
             imgIndex = 0;
 
@@ -1319,87 +1338,66 @@
                 '0';
 
 
-            /*
-                Change photo every 4.5 seconds
-            */
-
             sliderInterval =
-                setInterval(() => {
+                setInterval(
+                    () => {
 
-                    const nextIndex =
-                        (imgIndex + 1)
-                        % images.length;
-
-
-                    /*
-                        FIRST IMAGE ACTIVE
-                    */
-
-                    if (
-                        activeImage === 1
-                    ) {
-
-                        /*
-                            Load next image
-                            before fading.
-                        */
-
-                        sliderImg2.src =
-                            images[nextIndex];
+                        const nextIndex =
+                            (
+                                imgIndex + 1
+                            )
+                            %
+                            images.length;
 
 
-                        /*
-                            Smooth cross fade
-                        */
+                        if (
+                            activeImage === 1
+                        ) {
 
-                        sliderImg1.style.opacity =
-                            '0';
-
-
-                        sliderImg2.style.opacity =
-                            '1';
+                            sliderImg2.src =
+                                images[
+                                    nextIndex
+                                ];
 
 
-                        activeImage = 2;
-
-                    }
-
-
-                    /*
-                        SECOND IMAGE ACTIVE
-                    */
-
-                    else {
-
-                        /*
-                            Load next image
-                            before fading.
-                        */
-
-                        sliderImg1.src =
-                            images[nextIndex];
+                            sliderImg1.style.opacity =
+                                '0';
 
 
-                        /*
-                            Smooth cross fade
-                        */
-
-                        sliderImg2.style.opacity =
-                            '0';
+                            sliderImg2.style.opacity =
+                                '1';
 
 
-                        sliderImg1.style.opacity =
-                            '1';
+                            activeImage = 2;
+
+                        }
+
+                        else {
+
+                            sliderImg1.src =
+                                images[
+                                    nextIndex
+                                ];
 
 
-                        activeImage = 1;
-                    }
+                            sliderImg2.style.opacity =
+                                '0';
 
 
-                    imgIndex =
-                        nextIndex;
+                            sliderImg1.style.opacity =
+                                '1';
 
-                }, 3500);
+
+                            activeImage = 1;
+                        }
+
+
+                        imgIndex =
+                            nextIndex;
+
+                    },
+                    3500
+                );
         }
 
 
@@ -1437,13 +1435,34 @@
         ];
 
 
+        /* =====================================================
+           ATTRACTIVE WORD COLOURS
+        ===================================================== */
+
+        const lyricColors = [
+
+            "#FF4D6D",  /* Rose */
+            "#FFD166",  /* Golden */
+            "#06D6A0",  /* Green */
+            "#4CC9F0",  /* Sky Blue */
+            "#4895EF",  /* Blue */
+            "#9B5DE5",  /* Purple */
+            "#F15BB5",  /* Pink */
+            "#FF6B35",  /* Orange */
+            "#00F5D4",  /* Aqua */
+            "#FF85A1"   /* Light Pink */
+
+        ];
+
 
         /* =====================================================
            AUDIO
         ===================================================== */
 
         const audio =
-            new Audio('EHSAAS.mp3');
+            new Audio(
+                'EHSAAS.mp3'
+            );
 
 
         audio.preload =
@@ -1471,7 +1490,7 @@
 
 
         /* =====================================================
-           WAIT FUNCTION
+           WAIT
         ===================================================== */
 
         function wait(ms) {
@@ -1488,7 +1507,7 @@
 
 
         /* =====================================================
-           TYPEWRITER
+           WORD-BY-WORD COLOURFUL TYPEWRITER
         ===================================================== */
 
         async function typeText(
@@ -1496,15 +1515,108 @@
             text
         ) {
 
+            /*
+                Split the sentence into words.
+
+                Example:
+
+                "Teri nazaron ka dil"
+
+                becomes:
+
+                ["Teri", "nazaron", "ka", "dil"]
+            */
+
+            const words =
+                text.split(' ');
+
+
             for (
-                let char of text
+                let wordIndex = 0;
+                wordIndex < words.length;
+                wordIndex++
             ) {
 
-                element.textContent +=
-                    char;
+                /*
+                    Create one span for
+                    the complete word.
+                */
+
+                const wordSpan =
+                    document.createElement(
+                        'span'
+                    );
 
 
-                await wait(90);
+                wordSpan.className =
+                    'word';
+
+
+                /*
+                    Each WORD gets one colour.
+                */
+
+                const color =
+                    lyricColors[
+                        wordIndex %
+                        lyricColors.length
+                    ];
+
+
+                wordSpan.style.color =
+                    color;
+
+
+                wordSpan.style.textShadow = `
+                    0 0 3px ${color},
+                    0 1px 2px rgba(0, 0, 0, 0.9)
+                `;
+
+
+                element.appendChild(
+                    wordSpan
+                );
+
+
+                /*
+                    Type the letters of this
+                    word one by one.
+
+                    But ALL letters of the
+                    word have the SAME colour.
+                */
+
+                for (
+                    let char of words[wordIndex]
+                ) {
+
+                    wordSpan.textContent +=
+                        char;
+
+
+                    await wait(120);
+                }
+
+
+                /*
+                    Add space between words.
+                */
+
+                if (
+                    wordIndex <
+                    words.length - 1
+                ) {
+
+                    const space =
+                        document.createTextNode(
+                            ' '
+                        );
+
+
+                    element.appendChild(
+                        space
+                    );
+                }
             }
         }
 
@@ -1545,7 +1657,8 @@
                 );
 
 
-            lyricsArea.innerHTML = '';
+            lyricsArea.innerHTML =
+                '';
 
 
             for (
@@ -1641,10 +1754,155 @@
                         );
 
 
-                    stickyName.textContent =
-                        '✨ ' +
-                        userNameInput +
+                    /*
+                        Clear old name.
+                    */
+
+                    stickyName.innerHTML =
+                        '';
+
+
+                    /*
+                        Colours specifically
+                        for NAME alphabets.
+                    */
+
+                    const nameColors = [
+
+                        '#FF4D6D',
+
+                        '#FFD166',
+
+                        '#06D6A0',
+
+                        '#4CC9F0',
+
+                        '#4895EF',
+
+                        '#9B5DE5',
+
+                        '#F15BB5',
+
+                        '#FF6B35',
+
+                        '#00F5D4',
+
+                        '#FF85A1'
+
+                    ];
+
+
+                    /*
+                        Left sparkle
+                    */
+
+                    const leftSparkle =
+                        document.createElement(
+                            'span'
+                        );
+
+
+                    leftSparkle.textContent =
+                        '✨ ';
+
+
+                    stickyName.appendChild(
+                        leftSparkle
+                    );
+
+
+                    /*
+                        EVERY ALPHABET
+                        gets a different colour.
+                    */
+
+                    for (
+                        let i = 0;
+                        i < userNameInput.length;
+                        i++
+                    ) {
+
+                        const char =
+                            userNameInput[i];
+
+
+                        /*
+                            Keep spaces as spaces.
+                        */
+
+                        if (
+                            char === ' '
+                        ) {
+
+                            const space =
+                                document.createTextNode(
+                                    ' '
+                                );
+
+
+                            stickyName.appendChild(
+                                space
+                            );
+
+
+                            continue;
+                        }
+
+
+                        const charSpan =
+                            document.createElement(
+                                'span'
+                            );
+
+
+                        charSpan.className =
+                            'name-char';
+
+
+                        const color =
+                            nameColors[
+                                i %
+                                nameColors.length
+                            ];
+
+
+                        charSpan.style.color =
+                            color;
+
+
+                        charSpan.style.textShadow = `
+                            0 0 3px ${color},
+                            0 1px 2px rgba(0, 0, 0, 0.9)
+                        `;
+
+
+                        charSpan.textContent =
+                            char;
+
+
+                        stickyName.appendChild(
+                            charSpan
+                        );
+                    }
+
+
+                    /*
+                        Right sparkle
+                    */
+
+                    const rightSparkle =
+                        document.createElement(
+                            'span'
+                        );
+
+
+                    rightSparkle.textContent =
                         ' ✨';
+
+
+                    stickyName.appendChild(
+                        rightSparkle
+                    );
 
 
                     stickyName.style.display =
@@ -1700,10 +1958,6 @@
                         'none';
 
 
-                    /*
-                        Reset image slider
-                    */
-
                     imgIndex = 0;
 
                     activeImage = 1;
@@ -1724,10 +1978,6 @@
                     sliderImg2.style.opacity =
                         '0';
 
-
-                    /*
-                        Start again
-                    */
 
                     playMagic();
                 }
@@ -1766,4 +2016,5 @@
     </script>
 
 </body>
+
 </html>
