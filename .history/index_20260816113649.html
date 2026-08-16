@@ -15,7 +15,7 @@
             height: 100vh;
         }
 
-        /* HEART STYLING */
+        /* --- HEART STYLING (Same Size, Intense Blink) --- */
         .heart {
             position: absolute;
             color: #ff0000;
@@ -23,18 +23,22 @@
             z-index: 0;
         }
 
+        /* 1. Left & Right Side - Bahut Zyada Chamkila & Fast Blink */
         .heart-left {
             animation: pulse-intense 1s infinite ease-in-out;
         }
         .heart-right {
+            /* Speed halki si alag taki ek sath na chamkein (natural lage) */
             animation: pulse-intense 1.2s infinite ease-in-out;
         }
         @keyframes pulse-intense {
             0% { transform: scale(1); text-shadow: 0 0 10px red; opacity: 0.2; }
+            /* Ekdum jor se chamakna */
             50% { transform: scale(1.3); text-shadow: 0 0 30px red, 0 0 60px red, 0 0 100px #ff3333; opacity: 1; }
             100% { transform: scale(1); text-shadow: 0 0 10px red; opacity: 0.2; }
         }
 
+        /* 2. Center - Thoda zyada noticeable aur fast blink */
         .heart-center {
             animation: pulse-center 1.4s infinite ease-in-out;
         }
@@ -43,45 +47,47 @@
             50% { transform: scale(1.2); text-shadow: 0 0 20px red, 0 0 50px red; opacity: 0.9; }
             100% { transform: scale(1); text-shadow: 0 0 5px red; opacity: 0.2; }
         }
+        /* -------------------------- */
 
+        /* Top Photo Slider Section */
         #photo-container {
             position: absolute;
             top: 5%;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%; 
-            height: 50vh; 
+            width: 70%;
+            height: 35vh;
             z-index: 1;
             display: none;
             justify-content: center;
             align-items: center;
-        }
-        
-        #slider-image {
-            max-width: 85%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            object-fit: contain;
             border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.4); 
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
+        }
+        #slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
             transition: opacity 1s ease-in-out; 
             opacity: 1;
         }
-        /* LYRICS AREA */
+
+        /* Movie Credits Style Lyrics Area */
         #lyrics-area {
             position: absolute;
-            bottom: 2vh;
+            bottom: 5vh;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            height: 35vh; 
+            height: 50vh;
             z-index: 2;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: center;
             text-align: center;
+            
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
             mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
         }
@@ -103,48 +109,11 @@
             opacity: 0;
         }
 
-        /* --- WELCOME SCREEN STYLING --- */
-        #welcome-screen {
+        #playBtn {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 15;
-            background: rgba(15, 0, 0, 0.85);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
-            border: 1px solid #aa0000;
-        }
-
-        #welcome-screen h2 {
-            color: #ff79c6;
-            text-shadow: 0 0 15px #ff79c6;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-
-        #userName {
-            padding: 12px 20px;
-            font-size: 20px;
-            border-radius: 10px;
-            border: 2px solid #ff3333;
-            background: #000000;
-            color: white;
-            outline: none;
-            text-align: center;
-            font-family: 'Courier New', Courier, monospace;
-            margin-bottom: 25px;
-            width: 80%;
-            box-shadow: 0 0 15px rgba(255, 0, 50, 0.3);
-        }
-
-        #userName:focus {
-            box-shadow: 0 0 25px #ff3333;
-        }
-
-        .action-btn {
             padding: 15px 40px;
             font-size: 22px;
             background-color: #aa0000;
@@ -154,37 +123,6 @@
             cursor: pointer;
             box-shadow: 0 0 20px #aa0000;
             z-index: 10;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-        }
-
-        .action-btn:hover {
-            background-color: #ff0000;
-            box-shadow: 0 0 40px #ff0000;
-        }
-
-        #playAgainBtn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-        }
-
-        /* STICKY NAME STYLING */
-        #sticky-name {
-            position: absolute;
-            top: 57vh; 
-            left: 50%;
-            transform: translateX(-50%); 
-            font-size: 34px; 
-            color: #ff79c6;
-            text-shadow: 0 0 15px #ff79c6, 0 0 30px #ff0000;
-            z-index: 20;
-            display: none; 
-            font-weight: bold;
-            letter-spacing: 3px;
-            font-style: italic;
         }
     </style>
 </head>
@@ -192,22 +130,13 @@
 
     <div id="hearts-bg"></div>
 
-    <div id="sticky-name"></div>
-
-    <div id="welcome-screen">
-        <h2>Please enter your name to play and feel this romantic song ✨</h2>
-        <input type="text" id="userName" placeholder="Your Name..." autocomplete="off">
-        <br>
-        <button id="startBtn" class="action-btn">❤️ Enter & Play</button>
-    </div>
-
-    <button id="playAgainBtn" class="action-btn">🔄 Play Again</button>
-
     <div id="photo-container">
-        <img id="slider-image" src="photo 1.jpg" alt="Romantic Moments">
+        <img id="slider-image" src="photo1.jpg" alt="Romantic Moments">
     </div>
 
     <div id="lyrics-area"></div>
+
+    <button id="playBtn">❤️ Play Experience</button>
 
     <script>
         const heartsBg = document.getElementById('hearts-bg');
@@ -220,18 +149,23 @@
                 let leftPos = Math.random() * (maxLeft - minLeft) + minLeft;
                 heart.style.left = leftPos + 'vw';
                 heart.style.top = Math.random() * 95 + 'vh'; 
-                heart.style.animationDelay = Math.random() * 2 + 's'; 
+                heart.style.animationDelay = Math.random() * 2 + 's'; // Timing adjust ki taaki jaldi start ho
                 heartsBg.appendChild(heart);
             }
         }
 
+        // Left me 35 chamkile aur fast blinking hearts
         createHearts('heart-left', 35, 0, 25);
+        
+        // Right me 35 chamkile aur fast blinking hearts
         createHearts('heart-right', 35, 75, 98);
+        
+        // Center me ab 30 hearts hain (Pehle 15 the)
         createHearts('heart-center', 30, 30, 70);
 
         const images = [
-            'photo 1.jpg', 
-            'photo 2.jpeg', 
+            'photo1.jpg', 
+            'photo 2.jpg', 
             'photo 3.jpg', 
             'photo 4.jpg', 
             'photo 5.jpeg', 
@@ -257,30 +191,36 @@
         }
 
         const lyricsText = [
-            "Teri nazaron ka dil pe hua hai asar",
+           "Teri nazaron ka dil pe hua hai asar",
             "Tu mera mehboob hai jaana",
             "Teri ulfat mein jeeta har pal",
             "Tu ek tohfa hai khuda ka",
             "Tujhe paake jawaab mila hai asar",
             
+            
             "Tu hai woh sawaal Khuda ka",
             "Tu mila hai, yeh meri dua ka asar",
             "Tu mujhse door na jaana",
 
-            "Teri nazron ka dil pe hua hai asar",       
+            "Teri nazron ka dil pe hua hai asar",
             "Tu mera mehboob hai jaana",
-            "Teri ulfat mein jeeta har pal",
-            "Tu ik tohfa hai khuda ka"
+             "Teri ulfat mein jeeta har pal",
+             "Tu ik tohfa hai khuda ka"
+
         ];
         
         const audio = new Audio('EHSAAS.mp3'); 
 
         audio.addEventListener('ended', function() {
             clearInterval(sliderInterval); 
-            document.getElementById('playAgainBtn').style.display = 'block'; 
+            const btn = document.getElementById('playBtn');
+            btn.innerHTML = '🔄 Play Again'; 
+            btn.style.display = 'block'; 
         });
 
-        async function playMagic() {
+        document.getElementById('playBtn').addEventListener('click', async function() {
+            this.style.display = 'none'; 
+            
             audio.currentTime = 0; 
             audio.play(); 
             startImageSlider(); 
@@ -304,28 +244,6 @@
                 lineDiv.classList.add('scroll-up'); 
                 await new Promise(r => setTimeout(r, 1000)); 
             }
-        }
-
-        document.getElementById('startBtn').addEventListener('click', function() {
-            const userNameInput = document.getElementById('userName').value.trim();
-            
-            if(userNameInput === "") {
-                alert("Please enter your name first! ❤️");
-                return;
-            }
-
-            document.getElementById('welcome-screen').style.display = 'none';
-            
-            const stickyName = document.getElementById('sticky-name');
-            stickyName.innerHTML = "✨ " + userNameInput + " ✨";
-            stickyName.style.display = 'block';
-
-            playMagic();
-        });
-
-        document.getElementById('playAgainBtn').addEventListener('click', function() {
-            this.style.display = 'none'; 
-            playMagic(); 
         });
     </script>
 </body>

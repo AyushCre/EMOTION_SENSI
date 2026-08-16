@@ -15,7 +15,7 @@
             height: 100vh;
         }
 
-        /* HEART STYLING */
+        /* --- HEART STYLING --- */
         .heart {
             position: absolute;
             color: #ff0000;
@@ -44,38 +44,38 @@
             100% { transform: scale(1); text-shadow: 0 0 5px red; opacity: 0.2; }
         }
 
+        /* Top Photo Slider Section */
         #photo-container {
             position: absolute;
             top: 5%;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%; 
-            height: 50vh; 
+            width: 70%;
+            height: 35vh;
             z-index: 1;
             display: none;
             justify-content: center;
             align-items: center;
-        }
-        
-        #slider-image {
-            max-width: 85%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            object-fit: contain;
             border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.4); 
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
+        }
+        #slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
             transition: opacity 1s ease-in-out; 
             opacity: 1;
         }
-        /* LYRICS AREA */
+
+        /* Lyrics Area */
         #lyrics-area {
             position: absolute;
-            bottom: 2vh;
+            bottom: 5vh;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            height: 35vh; 
+            height: 50vh;
             z-index: 2;
             display: flex;
             flex-direction: column;
@@ -113,8 +113,8 @@
             z-index: 15;
             background: rgba(15, 0, 0, 0.85);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 0, 50, 0.4);
             border: 1px solid #aa0000;
         }
 
@@ -171,19 +171,18 @@
             display: none;
         }
 
-        /* STICKY NAME STYLING */
+        /* --- NAYA: STICKY NAME STYLING --- */
         #sticky-name {
             position: absolute;
-            top: 57vh; 
-            left: 50%;
-            transform: translateX(-50%); 
-            font-size: 34px; 
+            top: 20px;
+            right: 30px;
+            font-size: 22px;
             color: #ff79c6;
             text-shadow: 0 0 15px #ff79c6, 0 0 30px #ff0000;
             z-index: 20;
-            display: none; 
+            display: none; /* Starting me hide rahega */
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             font-style: italic;
         }
     </style>
@@ -192,6 +191,7 @@
 
     <div id="hearts-bg"></div>
 
+    <!-- NAYA: Sticky Name Display -->
     <div id="sticky-name"></div>
 
     <div id="welcome-screen">
@@ -204,7 +204,7 @@
     <button id="playAgainBtn" class="action-btn">🔄 Play Again</button>
 
     <div id="photo-container">
-        <img id="slider-image" src="photo 1.jpg" alt="Romantic Moments">
+        <img id="slider-image" src="photo1.jpg" alt="Romantic Moments">
     </div>
 
     <div id="lyrics-area"></div>
@@ -230,8 +230,8 @@
         createHearts('heart-center', 30, 30, 70);
 
         const images = [
-            'photo 1.jpg', 
-            'photo 2.jpeg', 
+            'photo1.jpg', 
+            'photo 2.jpg', 
             'photo 3.jpg', 
             'photo 4.jpg', 
             'photo 5.jpeg', 
@@ -257,20 +257,22 @@
         }
 
         const lyricsText = [
-            "Teri nazaron ka dil pe hua hai asar",
+           "Teri nazaron ka dil pe hua hai asar",
             "Tu mera mehboob hai jaana",
             "Teri ulfat mein jeeta har pal",
             "Tu ek tohfa hai khuda ka",
             "Tujhe paake jawaab mila hai asar",
             
+            
             "Tu hai woh sawaal Khuda ka",
             "Tu mila hai, yeh meri dua ka asar",
             "Tu mujhse door na jaana",
 
-            "Teri nazron ka dil pe hua hai asar",       
+            "Teri nazron ka dil pe hua hai asar",
             "Tu mera mehboob hai jaana",
-            "Teri ulfat mein jeeta har pal",
-            "Tu ik tohfa hai khuda ka"
+             "Teri ulfat mein jeeta har pal",
+             "Tu ik tohfa hai khuda ka"
+            // Google Search se baaki lines yahan add kar sakte ho!
         ];
         
         const audio = new Audio('EHSAAS.mp3'); 
@@ -297,7 +299,7 @@
                 let lineStr = lyricsText[i];
                 for(let j=0; j<lineStr.length; j++) {
                     lineDiv.innerHTML += lineStr[j];
-                    await new Promise(r => setTimeout(r, 90)); 
+                    await new Promise(r => setTimeout(r, 60)); 
                 }
 
                 await new Promise(r => setTimeout(r, 500)); 
@@ -316,6 +318,7 @@
 
             document.getElementById('welcome-screen').style.display = 'none';
             
+            // --- NAYA: Naam ko screen par show karna ---
             const stickyName = document.getElementById('sticky-name');
             stickyName.innerHTML = "✨ " + userNameInput + " ✨";
             stickyName.style.display = 'block';

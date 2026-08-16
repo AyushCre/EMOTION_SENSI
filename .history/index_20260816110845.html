@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Romantic Lyrics Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Fixed Pulsating Red Hearts */
+        .heart {
+            position: absolute;
+            color: #ff0000;
+            font-size: 25px;
+            animation: pulse 2s infinite ease-in-out;
+            z-index: 0;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); text-shadow: 0 0 10px red; opacity: 0.5; }
+            50% { transform: scale(1.6); text-shadow: 0 0 40px red, 0 0 60px red; opacity: 1; }
+            100% { transform: scale(1); text-shadow: 0 0 10px red; opacity: 0.5; }
+        }
+
+        /* Top Photo Slider Section */
+        #photo-container {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 35vh;
+            z-index: 1;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
+        }
+        #slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: opacity 1s ease-in-out; /* Smooth 1 sec fade effect */
+            opacity: 1;
+        }
+
+        /* Movie Credits Style Lyrics Area */
+        #lyrics-area {
+            position: absolute;
+            bottom: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 50vh;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            
+            /* Text ko photo se takrane se pehle gayab karne ka effect */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+        }
+
+        .line {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 15px #ff79c6, 0 0 30px #ff79c6;
+            transition: transform 3s ease-in, opacity 2.5s ease-in;
+            opacity: 1;
+            position: absolute;
+            bottom: 10%;
+        }
+
+        .scroll-up {
+            transform: translateY(-25vh);
+            opacity: 0;
+        }
+
+        #playBtn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 40px;
+            font-size: 22px;
+            background-color: #aa0000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 20px #aa0000;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Red Glowing Hearts -->
+    <div id="hearts-bg"></div>
+
+    <!-- Images Container -->
+    <div id="photo-container">
+        <!-- Pehli image start yahan se hogi -->
+        <img id="slider-image" src="photo1.jpg" alt="Romantic Moments">
+    </div>
+
+    <!-- Text Area -->
+    <div id="lyrics-area"></div>
+
+    <button id="playBtn">❤️ Play Experience</button>
+
+    <script>
+        // Hearts placement (Fix positions)
+        const heartsBg = document.getElementById('hearts-bg');
+        for(let i=0; i<18; i++) {
+            let heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 90 + 5 + 'vw';
+            heart.style.top = Math.random() * 90 + 5 + 'vh';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heartsBg.appendChild(heart);
+        }
+
+        // --- YAHAN TUMHARI SARI PHOTOS HAIN ---
+        // Exactly wahi naam hain jo tumne diye hain
+        const images = [
+            'photo1.jpg', 
+            'photo 2.jpg', 
+            'photo 3.jpg', 
+            'photo 4.jpg', 
+            'photo 5.jpeg', 
+            'photo 6.jpg'
+        ]; 
+        
+        let imgIndex = 0;
+        const sliderImg = document.getElementById('slider-image');
+
+        function startImageSlider() {
+            document.getElementById('photo-container').style.display = 'flex';
+            
+            // Har 3.5 seconds me animation chalega (1s fade out + 2.5s display)
+            setInterval(() => {
+                sliderImg.style.opacity = 0; // Pehle purani photo fade out hogi
+                
+                setTimeout(() => {
+                    // Yeh line automatically 6th photo ke baad wapas 1st photo le aayegi
+                    imgIndex = (imgIndex + 1) % images.length;
+                    
+                    sliderImg.src = images[imgIndex]; // Nayi photo load
+                    sliderImg.style.opacity = 1; // Nayi photo fade in hogi
+                }, 1000); // 1 second ka fade effect
+            }, 3500); 
+        }
+
+        // --- YAHAN TUM APNI LYRICS PASTE KARNA ---
+        const lyricsText = [
+            "Teri nazaron ka dil pe hua hai asar",
+            "Tu mera mehboob hai jaana",
+            "Teri ulfat mein jeeta har pal",
+            "Tu ek tohfa hai khuda ka",
+            "Tujhe paake jawaab mila hai asar",
+            
+
+            "Tujhe paa ke jawaab mila hai asal",
+            "Tu hai woh sawaal Khuda ka",
+            "Tu mila hai, yeh meri dua ka asar",
+            "Tu mujhse door na jaana",
+
+            "Teri nazron ka dil pe hua hai asar",
+            "Tu mera mehboob hai jaana",
+             "Teri ulfat mein jeeta har pal",
+             "Tu ik tohfa hai khuda ka"
+        ];
+        
+        // Agar audio add nahi karni to isko blank rehne do ya hidden audio laga lo
+         const audio = new Audio('EHSAAS.mp3');
+        document.getElementById('playBtn').addEventListener('click', async function() {
+            this.style.display = 'none';
+            startImageSlider(); // Photos start
+             audio.play(); // Agar audio use kar rahe ho to ye line uncomment kar dena
+
+            const lyricsArea = document.getElementById('lyrics-area');
+
+            // Text Animations
+            for(let i=0; i<lyricsText.length; i++) {
+                let lineDiv = document.createElement('div');
+                lineDiv.className = 'line';
+                lyricsArea.innerHTML = '';
+                lyricsArea.appendChild(lineDiv);
+
+                let lineStr = lyricsText[i];
+                for(let j=0; j<lineStr.length; j++) {
+                    lineDiv.innerHTML += lineStr[j];
+                    await new Promise(r => setTimeout(r, 45)); // Typing speed
+                }
+
+                await new Promise(r => setTimeout(r, 800)); // Pura sentence rukne ka time
+                
+                lineDiv.classList.add('scroll-up'); // Ooper bhejna aur fade karna
+                
+                await new Promise(r => setTimeout(r, 1500)); // Nayi line aane se pehle gap
+            }
+        });
+    </script>
+</body>
+</html>

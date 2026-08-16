@@ -15,7 +15,7 @@
             height: 100vh;
         }
 
-        /* HEART STYLING */
+        /* --- HEART STYLING --- */
         .heart {
             position: absolute;
             color: #ff0000;
@@ -44,38 +44,38 @@
             100% { transform: scale(1); text-shadow: 0 0 5px red; opacity: 0.2; }
         }
 
+        /* --- TOP PHOTO SLIDER SECTION (Size badha diya) --- */
         #photo-container {
             position: absolute;
             top: 5%;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%; 
-            height: 50vh; 
+            width: 80%; /* 70% se badha kar 80% kiya */
+            height: 50vh; /* 35vh se badha kar 50vh kiya taaki photo dabbi hui na lage */
             z-index: 1;
             display: none;
             justify-content: center;
             align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
         }
-        
         #slider-image {
-            max-width: 85%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.4); 
             transition: opacity 1s ease-in-out; 
             opacity: 1;
         }
-        /* LYRICS AREA */
+
+        /* --- LYRICS AREA (Niche shift kiya) --- */
         #lyrics-area {
             position: absolute;
             bottom: 2vh;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            height: 35vh; 
+            height: 35vh; /* Area thoda chota kiya taaki name se takraye nahi */
             z-index: 2;
             display: flex;
             flex-direction: column;
@@ -113,8 +113,8 @@
             z-index: 15;
             background: rgba(15, 0, 0, 0.85);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 0, 50, 0.4);
             border: 1px solid #aa0000;
         }
 
@@ -171,10 +171,10 @@
             display: none;
         }
 
-        /* STICKY NAME STYLING */
+        /* --- STICKY NAME STYLING (Niche shift kiya) --- */
         #sticky-name {
             position: absolute;
-            top: 57vh; 
+            top: 57vh; /* Photo badi hone ki wajah se isko thoda aur niche kiya */
             left: 50%;
             transform: translateX(-50%); 
             font-size: 34px; 
@@ -204,7 +204,7 @@
     <button id="playAgainBtn" class="action-btn">🔄 Play Again</button>
 
     <div id="photo-container">
-        <img id="slider-image" src="photo 1.jpg" alt="Romantic Moments">
+        <img id="slider-image" src="photo1.jpg" alt="Romantic Moments">
     </div>
 
     <div id="lyrics-area"></div>
@@ -267,7 +267,7 @@
             "Tu mila hai, yeh meri dua ka asar",
             "Tu mujhse door na jaana",
 
-            "Teri nazron ka dil pe hua hai asar",       
+            "Teri nazron ka dil pe hua hai asar",
             "Tu mera mehboob hai jaana",
             "Teri ulfat mein jeeta har pal",
             "Tu ik tohfa hai khuda ka"
