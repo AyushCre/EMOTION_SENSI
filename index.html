@@ -2,11 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
     <title>Emotional Romantic Lyrics Animation</title>
 
     <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
         * {
             box-sizing: border-box;
         }
@@ -17,94 +26,144 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: #000000;
         }
 
         body {
             color: white;
             font-family: 'Courier New', Courier, monospace;
+
             overflow: hidden;
+
             min-height: 100vh;
             min-height: 100dvh;
+
             position: relative;
         }
 
-        /* 
+
+        /* =====================================================
            HEART BACKGROUND
-         */
+        ===================================================== */
 
         #hearts-bg {
             position: fixed;
+
             inset: 0;
+
             width: 100%;
             height: 100%;
+
             overflow: hidden;
+
             pointer-events: none;
+
             z-index: 0;
         }
+
 
         .heart {
             position: absolute;
+
             color: #ff0000;
+
             font-size: 24px;
+
             z-index: 0;
+
             will-change: transform, opacity;
         }
 
+
         .heart-left,
         .heart-right {
-            animation: pulse-intense 1.2s infinite ease-in-out;
+            animation:
+                pulse-intense
+                1.2s
+                infinite
+                ease-in-out;
         }
+
 
         .heart-center {
-            animation: pulse-center 1.5s infinite ease-in-out;
+            animation:
+                pulse-center
+                1.5s
+                infinite
+                ease-in-out;
         }
 
+
         @keyframes pulse-intense {
+
             0% {
                 transform: scale(1);
-                text-shadow: 0 0 8px red;
+
+                text-shadow:
+                    0 0 8px red;
+
                 opacity: 0.2;
             }
 
             50% {
                 transform: scale(1.25);
-                text-shadow: 0 0 18px red, 0 0 35px red;
+
+                text-shadow:
+                    0 0 18px red,
+                    0 0 35px red;
+
                 opacity: 0.9;
             }
 
             100% {
                 transform: scale(1);
-                text-shadow: 0 0 8px red;
+
+                text-shadow:
+                    0 0 8px red;
+
                 opacity: 0.2;
             }
         }
 
+
         @keyframes pulse-center {
+
             0% {
                 transform: scale(1);
-                text-shadow: 0 0 5px red;
+
+                text-shadow:
+                    0 0 5px red;
+
                 opacity: 0.2;
             }
 
             50% {
                 transform: scale(1.18);
-                text-shadow: 0 0 15px red, 0 0 30px red;
+
+                text-shadow:
+                    0 0 15px red,
+                    0 0 30px red;
+
                 opacity: 0.8;
             }
 
             100% {
                 transform: scale(1);
-                text-shadow: 0 0 5px red;
+
+                text-shadow:
+                    0 0 5px red;
+
                 opacity: 0.2;
             }
         }
 
-        /*
-           PHOTO AREA
-         */
+
+        /* =====================================================
+           PHOTO CONTAINER
+        ===================================================== */
 
         #photo-container {
+
             position: absolute;
 
             top: 4%;
@@ -113,6 +172,7 @@
             transform: translateX(-50%);
 
             width: 100%;
+
             height: 51vh;
             height: 51dvh;
 
@@ -124,12 +184,24 @@
             align-items: center;
 
             padding: 10px;
+
+            overflow: hidden;
         }
 
-        #slider-image {
+
+        /* =====================================================
+           PHOTO CROSS FADE
+        ===================================================== */
+
+        #slider-image-1,
+        #slider-image-2 {
+
+            position: absolute;
+
             display: block;
 
             max-width: min(85%, 800px);
+
             max-height: 100%;
 
             width: auto;
@@ -142,16 +214,38 @@
             box-shadow:
                 0 0 20px rgba(255, 0, 50, 0.35);
 
-            transition: opacity 1s ease-in-out;
+            opacity: 0;
 
+            /*
+                Smooth transition.
+                Both images stay in the same place.
+            */
+
+            transition:
+                opacity 1.5s ease-in-out;
+
+            will-change: opacity;
+        }
+
+
+        /* First photo visible initially */
+
+        #slider-image-1 {
             opacity: 1;
         }
 
-        /* 
-           LYRICS
-         */
+
+        #slider-image-2 {
+            opacity: 0;
+        }
+
+
+        /* =====================================================
+           LYRICS AREA
+        ===================================================== */
 
         #lyrics-area {
+
             position: absolute;
 
             bottom: 2vh;
@@ -173,6 +267,7 @@
             flex-direction: column;
 
             justify-content: flex-end;
+
             align-items: center;
 
             text-align: center;
@@ -196,10 +291,17 @@
             pointer-events: none;
         }
 
+
         .line {
+
             width: 100%;
 
-            font-size: clamp(18px, 2vw, 26px);
+            font-size:
+                clamp(
+                    18px,
+                    2vw,
+                    26px
+                );
 
             line-height: 1.35;
 
@@ -228,72 +330,112 @@
             overflow-wrap: break-word;
         }
 
+
         .scroll-up {
-            transform: translateY(-25vh);
+
+            transform:
+                translateY(-25vh);
+
             opacity: 0;
         }
 
-        /*
+
+        /* =====================================================
            WELCOME SCREEN
-        */
+        ===================================================== */
 
         #welcome-screen {
+
             position: absolute;
 
             top: 50%;
             left: 50%;
 
-            transform: translate(-50%, -50%);
+            transform:
+                translate(-50%, -50%);
 
-            width: min(90%, 520px);
+            width:
+                min(90%, 520px);
 
             text-align: center;
 
             z-index: 15;
 
-            background: rgba(15, 0, 0, 0.88);
+            background:
+                rgba(15, 0, 0, 0.88);
 
-            padding: clamp(22px, 5vw, 40px);
+            padding:
+                clamp(
+                    22px,
+                    5vw,
+                    40px
+                );
 
             border-radius: 15px;
 
             box-shadow:
-                0 0 30px rgba(255, 0, 50, 0.3);
+                0 0 30px
+                rgba(255, 0, 50, 0.3);
 
-            border: 1px solid #aa0000;
+            border:
+                1px solid #aa0000;
 
-            backdrop-filter: blur(5px);
+            backdrop-filter:
+                blur(5px);
         }
 
+
         #welcome-screen h2 {
+
             color: #ff79c6;
 
             text-shadow:
                 0 0 12px #ff79c6;
 
-            margin: 0 0 25px;
+            margin:
+                0 0 25px;
 
-            font-size: clamp(18px, 4vw, 24px);
+            font-size:
+                clamp(
+                    18px,
+                    4vw,
+                    24px
+                );
 
             line-height: 1.4;
         }
 
+
+        /* =====================================================
+           NAME INPUT
+        ===================================================== */
+
         #userName {
+
             display: block;
 
-            width: min(100%, 380px);
+            width:
+                min(100%, 380px);
 
-            margin: 0 auto 22px;
+            margin:
+                0 auto 22px;
 
-            padding: 12px 18px;
+            padding:
+                12px 18px;
 
-            font-size: clamp(16px, 4vw, 20px);
+            font-size:
+                clamp(
+                    16px,
+                    4vw,
+                    20px
+                );
 
             border-radius: 10px;
 
-            border: 2px solid #ff3333;
+            border:
+                2px solid #ff3333;
 
-            background: #000;
+            background: #000000;
 
             color: white;
 
@@ -301,29 +443,44 @@
 
             text-align: center;
 
-            font-family: 'Courier New', Courier, monospace;
+            font-family:
+                'Courier New',
+                Courier,
+                monospace;
 
             box-shadow:
-                0 0 15px rgba(255, 0, 50, 0.3);
+                0 0 15px
+                rgba(255, 0, 50, 0.3);
         }
 
+
         #userName:focus {
+
             box-shadow:
                 0 0 20px #ff3333;
         }
 
-        /* 
+
+        /* =====================================================
            BUTTON
-         */
+        ===================================================== */
 
         .action-btn {
-            padding: 13px 28px;
+
+            padding:
+                13px 28px;
 
             min-height: 48px;
 
-            font-size: clamp(16px, 4vw, 22px);
+            font-size:
+                clamp(
+                    16px,
+                    4vw,
+                    22px
+                );
 
-            background-color: #aa0000;
+            background-color:
+                #aa0000;
 
             color: white;
 
@@ -338,7 +495,10 @@
 
             z-index: 10;
 
-            font-family: 'Courier New', Courier, monospace;
+            font-family:
+                'Courier New',
+                Courier,
+                monospace;
 
             font-weight: bold;
 
@@ -350,39 +510,50 @@
                 transform 0.2s ease;
         }
 
+
         .action-btn:hover {
-            background-color: #ff0000;
+
+            background-color:
+                #ff0000;
 
             box-shadow:
                 0 0 30px #ff0000;
         }
 
+
         .action-btn:active {
-            transform: scale(0.96);
+
+            transform:
+                scale(0.96);
         }
 
-        /* 
+
+        /* =====================================================
            PLAY AGAIN
-         */
+        ===================================================== */
 
         #playAgainBtn {
+
             position: absolute;
 
             top: 50%;
             left: 50%;
 
-            transform: translate(-50%, -50%);
+            transform:
+                translate(-50%, -50%);
 
             display: none;
 
             white-space: nowrap;
         }
 
-        /* 
+
+        /* =====================================================
            STICKY NAME
-         */
+        ===================================================== */
 
         #sticky-name {
+
             position: absolute;
 
             top: 57vh;
@@ -390,13 +561,19 @@
 
             left: 50%;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
             width: 90%;
 
             text-align: center;
 
-            font-size: clamp(22px, 4vw, 34px);
+            font-size:
+                clamp(
+                    22px,
+                    4vw,
+                    34px
+                );
 
             color: #ff79c6;
 
@@ -410,87 +587,141 @@
 
             font-weight: bold;
 
-            letter-spacing: clamp(1px, 0.5vw, 3px);
+            letter-spacing:
+                clamp(
+                    1px,
+                    0.5vw,
+                    3px
+                );
 
             font-style: italic;
 
             overflow-wrap: break-word;
         }
 
-        /* 
-           TABLET
-         */
 
-        @media (min-width: 601px) and (max-width: 1024px) {
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (min-width: 601px)
+        and (max-width: 1024px) {
 
             #photo-container {
+
                 top: 5%;
+
                 height: 48dvh;
             }
 
-            #slider-image {
+
+            #slider-image-1,
+            #slider-image-2 {
+
                 max-width: 80%;
             }
 
+
             #lyrics-area {
+
                 width: 88%;
+
                 height: 38dvh;
             }
 
+
             .line {
-                font-size: clamp(20px, 2.8vw, 25px);
+
+                font-size:
+                    clamp(
+                        20px,
+                        2.8vw,
+                        25px
+                    );
             }
 
+
             #sticky-name {
+
                 top: 55dvh;
             }
 
+
             .heart {
+
                 font-size: 22px;
             }
         }
 
-        /* 
+
+        /* =====================================================
            MOBILE
-         */
+        ===================================================== */
 
         @media (max-width: 600px) {
 
             body {
+
                 min-height: 100dvh;
             }
-          
+
+
+            /* Smaller hearts */
 
             .heart {
+
                 font-size: 17px;
             }
 
+
+            /* Photo */
+
             #photo-container {
+
                 top: 3%;
+
                 height: 46dvh;
 
                 padding: 8px;
             }
 
-            #slider-image {
+
+            #slider-image-1,
+            #slider-image-2 {
+
                 max-width: 90%;
+
                 max-height: 100%;
 
                 border-radius: 12px;
 
                 box-shadow:
-                    0 0 15px rgba(255, 0, 50, 0.3);
+                    0 0 15px
+                    rgba(255, 0, 50, 0.3);
             }
 
+
+            /* Name */
+
             #sticky-name {
+
                 top: 51dvh;
 
-                font-size: clamp(20px, 6vw, 28px);
+                font-size:
+                    clamp(
+                        20px,
+                        6vw,
+                        28px
+                    );
 
                 width: 92%;
             }
 
+
+            /* Lyrics */
+
             #lyrics-area {
+
                 bottom: 2dvh;
 
                 width: 94%;
@@ -498,8 +729,15 @@
                 height: 35dvh;
             }
 
+
             .line {
-                font-size: clamp(16px, 5vw, 21px);
+
+                font-size:
+                    clamp(
+                        16px,
+                        5vw,
+                        21px
+                    );
 
                 line-height: 1.35;
 
@@ -512,25 +750,37 @@
                     0 0 15px #ff79c6;
             }
 
+
             .scroll-up {
-                transform: translateY(-22dvh);
+
+                transform:
+                    translateY(-22dvh);
             }
 
+
+            /* Welcome */
+
             #welcome-screen {
+
                 width: 90%;
 
-                padding: 25px 18px;
+                padding:
+                    25px 18px;
 
                 border-radius: 13px;
             }
 
+
             #welcome-screen h2 {
+
                 font-size: 18px;
 
                 margin-bottom: 22px;
             }
 
+
             #userName {
+
                 width: 100%;
 
                 font-size: 17px;
@@ -538,83 +788,116 @@
                 padding: 12px;
             }
 
+
             .action-btn {
+
                 width: auto;
 
                 max-width: 100%;
 
-                padding: 12px 20px;
+                padding:
+                    12px 20px;
 
                 font-size: 17px;
             }
 
+
             #playAgainBtn {
+
                 width: auto;
             }
         }
 
-        /*
+
+        /* =====================================================
            SMALL MOBILE
-         */
+        ===================================================== */
 
         @media (max-width: 380px) {
 
             #photo-container {
+
                 height: 43dvh;
             }
 
+
             #sticky-name {
+
                 top: 49dvh;
 
                 font-size: 20px;
             }
 
+
             #lyrics-area {
+
                 height: 38dvh;
             }
 
+
             .line {
+
                 font-size: 15px;
             }
 
+
             #welcome-screen {
-                padding: 20px 14px;
+
+                padding:
+                    20px 14px;
             }
 
+
             #welcome-screen h2 {
+
                 font-size: 16px;
             }
 
+
             .action-btn {
+
                 font-size: 15px;
-                padding: 11px 16px;
+
+                padding:
+                    11px 16px;
             }
         }
 
-        /* 
-           LANDSCAPE MOBILE
-        */
 
-        @media (max-height: 500px) and (orientation: landscape) {
+        /* =====================================================
+           LANDSCAPE MOBILE
+        ===================================================== */
+
+        @media (max-height: 500px)
+        and (orientation: landscape) {
 
             #photo-container {
+
                 top: 2dvh;
 
                 height: 55dvh;
             }
 
-            #slider-image {
+
+            #slider-image-1,
+            #slider-image-2 {
+
                 max-height: 100%;
+
                 max-width: 45%;
             }
 
+
             #sticky-name {
+
                 top: 57dvh;
 
                 font-size: 18px;
             }
 
+
             #lyrics-area {
+
                 bottom: 1dvh;
 
                 height: 34dvh;
@@ -622,42 +905,54 @@
                 width: 90%;
             }
 
+
             .line {
+
                 font-size: 16px;
 
                 margin-bottom: 8px;
             }
 
+
             #welcome-screen {
+
                 width: 70%;
 
                 padding: 15px;
             }
 
+
             #welcome-screen h2 {
+
                 font-size: 15px;
 
                 margin-bottom: 10px;
             }
 
+
             #userName {
+
                 padding: 8px;
 
                 margin-bottom: 10px;
             }
 
+
             .action-btn {
+
                 min-height: 40px;
 
-                padding: 8px 18px;
+                padding:
+                    8px 18px;
 
                 font-size: 15px;
             }
         }
 
-        /* 
-           DEVICES WITH REDUCED MOTION
-        */
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
 
         @media (prefers-reduced-motion: reduce) {
 
@@ -665,31 +960,50 @@
             .heart-left,
             .heart-right,
             .heart-center {
+
                 animation-duration: 3s;
             }
 
-            #slider-image,
+
+            #slider-image-1,
+            #slider-image-2,
             .line {
+
                 transition-duration: 0.5s;
             }
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- HEART BACKGROUND -->
+
+    <!-- =====================================================
+         HEART BACKGROUND
+    ===================================================== -->
+
     <div id="hearts-bg"></div>
 
-    <!-- USER NAME -->
+
+    <!-- =====================================================
+         STICKY NAME
+    ===================================================== -->
+
     <div id="sticky-name"></div>
 
-    <!-- WELCOME SCREEN -->
+
+    <!-- =====================================================
+         WELCOME SCREEN
+    ===================================================== -->
+
     <div id="welcome-screen">
 
         <h2>
             Please enter your name to play and feel this romantic song ✨
         </h2>
+
 
         <input
             type="text"
@@ -699,156 +1013,400 @@
             maxlength="30"
         >
 
-        <button id="startBtn" class="action-btn">
+
+        <button
+            id="startBtn"
+            class="action-btn"
+        >
             ❤️ Enter & Play
         </button>
 
     </div>
 
-    <!-- PLAY AGAIN -->
-    <button id="playAgainBtn" class="action-btn">
+
+    <!-- =====================================================
+         PLAY AGAIN
+    ===================================================== -->
+
+    <button
+        id="playAgainBtn"
+        class="action-btn"
+    >
         🔄 Play Again
     </button>
 
-    <!-- PHOTO -->
+
+    <!-- =====================================================
+         PHOTO SLIDER
+    ===================================================== -->
+
     <div id="photo-container">
 
         <img
-            id="slider-image"
+            id="slider-image-1"
             src="photo 1.jpg"
+            alt="Romantic Moments"
+        >
+
+
+        <img
+            id="slider-image-2"
+            src="photo 2.jpeg"
             alt="Romantic Moments"
         >
 
     </div>
 
-    <!-- LYRICS -->
+
+    <!-- =====================================================
+         LYRICS
+    ===================================================== -->
+
     <div id="lyrics-area"></div>
 
 
     <script>
 
-        /* 
+
+        /* =====================================================
            HEARTS
-        */
+        ===================================================== */
 
-        const heartsBg = document.getElementById('hearts-bg');
+        const heartsBg =
+            document.getElementById('hearts-bg');
 
-        function createHearts(className, count, minLeft, maxLeft) {
 
-            const fragment = document.createDocumentFragment();
+        function createHearts(
+            className,
+            count,
+            minLeft,
+            maxLeft
+        ) {
 
-            for (let i = 0; i < count; i++) {
+            const fragment =
+                document.createDocumentFragment();
 
-                const heart = document.createElement('div');
 
-                heart.className = `heart ${className}`;
+            for (
+                let i = 0;
+                i < count;
+                i++
+            ) {
+
+                const heart =
+                    document.createElement('div');
+
+
+                heart.className =
+                    `heart ${className}`;
+
 
                 heart.textContent = '❤';
 
-                const leftPos =
-                    Math.random() * (maxLeft - minLeft) + minLeft;
 
-                heart.style.left = leftPos + 'vw';
+                const leftPos =
+                    Math.random() *
+                    (maxLeft - minLeft)
+                    +
+                    minLeft;
+
+
+                heart.style.left =
+                    leftPos + 'vw';
+
 
                 heart.style.top =
                     Math.random() * 95 + 'vh';
 
+
                 heart.style.animationDelay =
                     Math.random() * 2 + 's';
 
+
                 fragment.appendChild(heart);
             }
+
 
             heartsBg.appendChild(fragment);
         }
 
 
         /*
-            Desktop  = 100 hearts
-            Tablet   = 60 hearts
-            Mobile   = 40 hearts
+            Desktop = 100 hearts
+            Tablet  = 60 hearts
+            Mobile  = 40 hearts
         */
 
         function generateResponsiveHearts() {
 
-            const width = window.innerWidth;
+            const width =
+                window.innerWidth;
+
 
             heartsBg.innerHTML = '';
 
+
             if (width <= 600) {
 
-                createHearts('heart-left', 12, 0, 25);
-                createHearts('heart-right', 12, 75, 98);
-                createHearts('heart-center', 16, 30, 70);
+                createHearts(
+                    'heart-left',
+                    12,
+                    0,
+                    25
+                );
 
-            } else if (width <= 1024) {
 
-                createHearts('heart-left', 20, 0, 25);
-                createHearts('heart-right', 20, 75, 98);
-                createHearts('heart-center', 20, 30, 70);
+                createHearts(
+                    'heart-right',
+                    12,
+                    75,
+                    98
+                );
 
-            } else {
 
-                createHearts('heart-left', 35, 0, 25);
-                createHearts('heart-right', 35, 75, 98);
-                createHearts('heart-center', 30, 30, 70);
+                createHearts(
+                    'heart-center',
+                    16,
+                    30,
+                    70
+                );
+
+            }
+
+            else if (width <= 1024) {
+
+                createHearts(
+                    'heart-left',
+                    20,
+                    0,
+                    25
+                );
+
+
+                createHearts(
+                    'heart-right',
+                    20,
+                    75,
+                    98
+                );
+
+
+                createHearts(
+                    'heart-center',
+                    20,
+                    30,
+                    70
+                );
+
+            }
+
+            else {
+
+                createHearts(
+                    'heart-left',
+                    35,
+                    0,
+                    25
+                );
+
+
+                createHearts(
+                    'heart-right',
+                    35,
+                    75,
+                    98
+                );
+
+
+                createHearts(
+                    'heart-center',
+                    30,
+                    30,
+                    70
+                );
             }
         }
+
 
         generateResponsiveHearts();
 
 
-        /* 
+
+        /* =====================================================
            IMAGE SLIDER
-         */
+           SMOOTH CROSS-FADE
+        ===================================================== */
 
         const images = [
+
             'photo 1.jpg',
+
             'photo 2.jpeg',
+
             'photo 3.jpg',
+
             'photo 4.jpg',
+
             'photo 5.jpeg',
+
             'photo 6.jpg'
+
         ];
+
 
         let imgIndex = 0;
 
-        const sliderImg =
-            document.getElementById('slider-image');
+
+        const sliderImg1 =
+            document.getElementById(
+                'slider-image-1'
+            );
+
+
+        const sliderImg2 =
+            document.getElementById(
+                'slider-image-2'
+            );
+
 
         let sliderInterval;
 
 
+        let activeImage = 1;
+
+
+
+        /* =====================================================
+           START IMAGE SLIDER
+        ===================================================== */
+
         function startImageSlider() {
 
-            document.getElementById('photo-container')
+            document
+                .getElementById(
+                    'photo-container'
+                )
                 .style.display = 'flex';
 
-            clearInterval(sliderInterval);
 
-            sliderInterval = setInterval(() => {
+            clearInterval(
+                sliderInterval
+            );
 
-                sliderImg.style.opacity = 0;
 
-                setTimeout(() => {
+            /*
+                Reset slider
+            */
+
+            imgIndex = 0;
+
+            activeImage = 1;
+
+
+            sliderImg1.src =
+                images[0];
+
+
+            sliderImg2.src =
+                images[1];
+
+
+            sliderImg1.style.opacity =
+                '1';
+
+
+            sliderImg2.style.opacity =
+                '0';
+
+
+            /*
+                Change photo every 4.5 seconds
+            */
+
+            sliderInterval =
+                setInterval(() => {
+
+                    const nextIndex =
+                        (imgIndex + 1)
+                        % images.length;
+
+
+                    /*
+                        FIRST IMAGE ACTIVE
+                    */
+
+                    if (
+                        activeImage === 1
+                    ) {
+
+                        /*
+                            Load next image
+                            before fading.
+                        */
+
+                        sliderImg2.src =
+                            images[nextIndex];
+
+
+                        /*
+                            Smooth cross fade
+                        */
+
+                        sliderImg1.style.opacity =
+                            '0';
+
+
+                        sliderImg2.style.opacity =
+                            '1';
+
+
+                        activeImage = 2;
+
+                    }
+
+
+                    /*
+                        SECOND IMAGE ACTIVE
+                    */
+
+                    else {
+
+                        /*
+                            Load next image
+                            before fading.
+                        */
+
+                        sliderImg1.src =
+                            images[nextIndex];
+
+
+                        /*
+                            Smooth cross fade
+                        */
+
+                        sliderImg2.style.opacity =
+                            '0';
+
+
+                        sliderImg1.style.opacity =
+                            '1';
+
+
+                        activeImage = 1;
+                    }
+
 
                     imgIndex =
-                        (imgIndex + 1) % images.length;
+                        nextIndex;
 
-                    sliderImg.src =
-                        images[imgIndex];
-
-                    sliderImg.style.opacity = 1;
-
-                }, 800);
-
-            }, 3500);
+                }, 3500);
         }
 
 
-        /* 
+
+        /* =====================================================
            LYRICS
-         */
+        ===================================================== */
 
         const lyricsText = [
 
@@ -875,56 +1433,101 @@
             "Teri ulfat mein jeeta har pal",
 
             "Tu ik tohfa hai khuda ka"
+
         ];
-        
+
+
+
+        /* =====================================================
+           AUDIO
+        ===================================================== */
 
         const audio =
             new Audio('EHSAAS.mp3');
 
 
-        audio.preload = 'auto';
+        audio.preload =
+            'auto';
 
 
-        audio.addEventListener('ended', function () {
+        audio.addEventListener(
+            'ended',
+            function () {
 
-            clearInterval(sliderInterval);
+                clearInterval(
+                    sliderInterval
+                );
 
-            document.getElementById('playAgainBtn')
-                .style.display = 'block';
-        });
-      
+
+                document
+                    .getElementById(
+                        'playAgainBtn'
+                    )
+                    .style.display =
+                    'block';
+            }
+        );
+
+
+
+        /* =====================================================
+           WAIT FUNCTION
+        ===================================================== */
 
         function wait(ms) {
 
-            return new Promise(resolve =>
-                setTimeout(resolve, ms)
+            return new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        ms
+                    )
             );
         }
 
 
-        async function typeText(element, text) {
-           
 
-            for (let char of text) {
+        /* =====================================================
+           TYPEWRITER
+        ===================================================== */
 
-                element.textContent += char;
+        async function typeText(
+            element,
+            text
+        ) {
+
+            for (
+                let char of text
+            ) {
+
+                element.textContent +=
+                    char;
+
 
                 await wait(90);
             }
         }
 
-       
+
+
+        /* =====================================================
+           PLAY MAGIC
+        ===================================================== */
+
         async function playMagic() {
 
             audio.pause();
 
             audio.currentTime = 0;
 
+
             try {
 
                 await audio.play();
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.log(
                     'Audio could not autoplay:',
@@ -937,7 +1540,10 @@
 
 
             const lyricsArea =
-                document.getElementById('lyrics-area');
+                document.getElementById(
+                    'lyrics-area'
+                );
+
 
             lyricsArea.innerHTML = '';
 
@@ -949,13 +1555,22 @@
             ) {
 
                 const lineDiv =
-                    document.createElement('div');
+                    document.createElement(
+                        'div'
+                    );
 
-                lineDiv.className = 'line';
 
-                lyricsArea.innerHTML = '';
+                lineDiv.className =
+                    'line';
 
-                lyricsArea.appendChild(lineDiv);
+
+                lyricsArea.innerHTML =
+                    '';
+
+
+                lyricsArea.appendChild(
+                    lineDiv
+                );
 
 
                 await typeText(
@@ -975,89 +1590,178 @@
                 await wait(1000);
             }
         }
-       
-        document
-            .getElementById('startBtn')
-            .addEventListener('click', function () {
-
-                const userNameInput =
-                    document
-                        .getElementById('userName')
-                        .value
-                        .trim();
 
 
-                if (userNameInput === '') {
 
-                    alert(
-                        'Please enter your name first! ❤️'
-                    );
-
-                    return;
-                }
-
-
-                document
-                    .getElementById('welcome-screen')
-                    .style.display = 'none';
-
-
-                const stickyName =
-                    document.getElementById(
-                        'sticky-name'
-                    );
-
-
-                stickyName.textContent =
-                    '✨ ' + userNameInput + ' ✨';
-
-
-                stickyName.style.display =
-                    'block';
-
-
-                playMagic();
-            });
-        
+        /* =====================================================
+           START BUTTON
+        ===================================================== */
 
         document
-            .getElementById('userName')
-            .addEventListener('keydown', function (event) {
+            .getElementById(
+                'startBtn'
+            )
+            .addEventListener(
+                'click',
+                function () {
 
-                if (event.key === 'Enter') {
+                    const userNameInput =
+                        document
+                            .getElementById(
+                                'userName'
+                            )
+                            .value
+                            .trim();
+
+
+                    if (
+                        userNameInput === ''
+                    ) {
+
+                        alert(
+                            'Please enter your name first! ❤️'
+                        );
+
+
+                        return;
+                    }
+
 
                     document
-                        .getElementById('startBtn')
-                        .click();
+                        .getElementById(
+                            'welcome-screen'
+                        )
+                        .style.display =
+                        'none';
+
+
+                    const stickyName =
+                        document.getElementById(
+                            'sticky-name'
+                        );
+
+
+                    stickyName.textContent =
+                        '✨ ' +
+                        userNameInput +
+                        ' ✨';
+
+
+                    stickyName.style.display =
+                        'block';
+
+
+                    playMagic();
                 }
-            });
-       
+            );
+
+
+
+        /* =====================================================
+           ENTER KEY SUPPORT
+        ===================================================== */
+
         document
-            .getElementById('playAgainBtn')
-            .addEventListener('click', function () {
+            .getElementById(
+                'userName'
+            )
+            .addEventListener(
+                'keydown',
+                function (event) {
 
-                this.style.display = 'none';
+                    if (
+                        event.key === 'Enter'
+                    ) {
 
-                imgIndex = 0;
+                        document
+                            .getElementById(
+                                'startBtn'
+                            )
+                            .click();
+                    }
+                }
+            );
 
-                sliderImg.src = images[0];
 
-                playMagic();
-            });
-       
+
+        /* =====================================================
+           PLAY AGAIN
+        ===================================================== */
+
+        document
+            .getElementById(
+                'playAgainBtn'
+            )
+            .addEventListener(
+                'click',
+                function () {
+
+                    this.style.display =
+                        'none';
+
+
+                    /*
+                        Reset image slider
+                    */
+
+                    imgIndex = 0;
+
+                    activeImage = 1;
+
+
+                    sliderImg1.src =
+                        images[0];
+
+
+                    sliderImg2.src =
+                        images[1];
+
+
+                    sliderImg1.style.opacity =
+                        '1';
+
+
+                    sliderImg2.style.opacity =
+                        '0';
+
+
+                    /*
+                        Start again
+                    */
+
+                    playMagic();
+                }
+            );
+
+
+
+        /* =====================================================
+           RESIZE
+        ===================================================== */
 
         let resizeTimer;
 
-        window.addEventListener('resize', function () {
 
-            clearTimeout(resizeTimer);
+        window.addEventListener(
+            'resize',
+            function () {
 
-            resizeTimer = setTimeout(() => {
+                clearTimeout(
+                    resizeTimer
+                );
 
-                generateResponsiveHearts();
 
-            }, 300);
-        });
+                resizeTimer =
+                    setTimeout(
+                        () => {
+
+                            generateResponsiveHearts();
+
+                        },
+                        300
+                    );
+            }
+        );
 
     </script>
 
